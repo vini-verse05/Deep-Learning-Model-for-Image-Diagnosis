@@ -1,0 +1,62 @@
+# Python cache files
+
+**pycache**/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables
+
+.env
+
+# Model files (large)
+
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.ckpt
+
+# Dataset (ignore full dataset, keep only sample if needed)
+
+dataset/
+
+# Jupyter Notebook checkpoints
+
+.ipynb_checkpoints/
+
+# Logs
+
+*.log
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# IDE / Editor files
+
+.vscode/
+.idea/
+
+# Temporary files
+
+*.tmp
+*.temp
+
+# Testing / coverage
+
+.coverage
+htmlcov/
+
+# Build files
+
+build/
+dist/
+*.egg-info/
