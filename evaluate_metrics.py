@@ -43,3 +43,13 @@ print(f'AUC-ROC     : {auc:.4f}')
 print(f'\nDetailed Report:')
 print(classification_report(y_true, y_pred,
       target_names=['Diseased (0)', 'Healthy (1)']))
+
+from sklearn.metrics import roc_curve
+
+fpr, tpr, thresholds = roc_curve(y_true, y_pred)
+
+# optimal threshold
+optimal_idx = (tpr - fpr).argmax()
+optimal_threshold = thresholds[optimal_idx]
+
+print("Best Threshold:", optimal_threshold)

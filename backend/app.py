@@ -155,17 +155,20 @@ def predict():
         # Step 5: Preprocess & predict
         img_array = preprocess_single_image(dec_temp)
         raw_pred  = model.predict(img_array, verbose=0)[0][0]
+        print("RAW PREDICTION:", raw_pred)
 
         # Interpret sigmoid output:
         # >= 0.5 → Healthy (class 1), < 0.5 → Diseased (class 0)
-        if raw_pred >= 0.5:
-            label      = 'Healthy'
-            confidence = float(raw_pred) * 100
-            message    = 'No tumor detected. Routine follow-up recommended.'
+        THRESHOLD = 0.4   # 🔥 adjust based on bias
+
+        if raw_pred >= THRESHOLD:
+            label = 'Healthy'
+            confidence = float(raw_pred) * 100   # 🔥 FIX
+            message = 'No tumor detected. Routine check recommended.'
         else:
-            label      = 'Diseased'
-            confidence = (1 - float(raw_pred)) * 100
-            message    = 'Potential tumor detected. Please consult a specialist.'
+            label = 'Diseased'
+            confidence = (1 - float(raw_pred)) * 100   # 🔥 FIX
+            message = 'Possible tumor detected. Consult a specialist.'
 
         # Step 6: Generate Grad-CAM heatmap
         heatmap          = get_gradcam_heatmap(model, img_array, LAST_CONV_LAYER)

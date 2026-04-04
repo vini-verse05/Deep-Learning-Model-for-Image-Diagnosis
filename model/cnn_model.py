@@ -60,10 +60,15 @@ def build_model():
     ])
 
     # Step 4: Compile
+    import tensorflow as tf
+
     model.compile(
-        optimizer = Adam(learning_rate=0.0001),
-        loss      = 'binary_crossentropy',
-        metrics   = ['accuracy']
+        optimizer='adam',
+        loss='binary_crossentropy',
+        metrics=[
+            'accuracy',
+            tf.keras.metrics.AUC(name='auc')   # 🔥 ADD THIS
+        ]
     )
 
     return model, base_model
@@ -80,9 +85,12 @@ def unfreeze_top_layers(model, base_model, num_layers=20):
         layer.trainable = False
 
     model.compile(
-        optimizer = Adam(learning_rate=1e-5),
-        loss      = 'binary_crossentropy',
-        metrics   = ['accuracy']
+        optimizer=tf.keras.optimizers.Adam(learning_rate=1e-5),
+        loss='binary_crossentropy',
+        metrics=[
+            'accuracy',
+            tf.keras.metrics.AUC(name='auc')
+        ]
     )
 
     print(f'Unfroze last {num_layers} layers of ResNet50 for fine-tuning')

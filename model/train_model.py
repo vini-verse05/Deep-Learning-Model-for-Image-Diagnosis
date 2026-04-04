@@ -23,6 +23,8 @@ os.makedirs('model', exist_ok=True)
 print('Loading dataset...')
 train_gen, val_gen, test_gen = get_data_generators()
 
+print("Class indices:", train_gen.class_indices)
+
 # ── Step 2: Compute class weights to fix class imbalance ───────
 labels = train_gen.classes
 class_weights_arr = compute_class_weight(
@@ -42,12 +44,12 @@ model, base_model = build_model()
 callbacks = [
     ModelCheckpoint(
         filepath       = 'model/brain_tumor_model.h5',
-        monitor        = 'val_loss',
+        monitor        = 'val_accuracy',
         save_best_only = True,
         verbose        = 1
     ),
     EarlyStopping(
-        monitor              = 'val_loss',
+        monitor              = 'val_accuracy',
         patience             = 5,
         restore_best_weights = True,
         verbose              = 1
@@ -77,7 +79,7 @@ model = unfreeze_top_layers(model, base_model, num_layers=20)
 
 history2 = model.fit(
     train_gen,
-    epochs          = 10,
+    epochs          = 15,
     validation_data = val_gen,
     class_weight    = class_weight_dict,
     callbacks       = callbacks,
@@ -86,9 +88,11 @@ history2 = model.fit(
 
 # ── Step 7: Evaluate on test set ──────────────────────────────
 print('\nEvaluating on test set...')
-test_loss, test_accuracy = model.evaluate(test_gen)
-print(f'Test Accuracy: {test_accuracy * 100:.2f}%')
-print(f'Test Loss    : {test_loss:.4f}')
+loss, accuracy, auc = model.evaluate(test_gen)
+
+print(f'Test Accuracy: {accuracy * 100:.2f}%')
+print(f'Test Loss    : {loss:.4f}')
+print(f'Test AUC     : {auc:.4f}')
 
 # ── Step 8: Plot training curves ──────────────────────────────
 def plot_history(h1, h2):
