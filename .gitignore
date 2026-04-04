@@ -1,62 +1,73 @@
-# Python cache files
+# ========================
+# Python
+# ========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-**pycache**/
-*.py[cod]
-*$py.class
-
-# Virtual environment
-
+# ========================
+# Virtual Environments
+# ========================
 venv/
 env/
-ENV/
 .venv/
+ENV/
 
-# Environment variables
-
-.env
-
-# Model files (large)
-
-*.h5
-*.hdf5
-*.pt
-*.pth
-*.ckpt
-
-# Dataset (ignore full dataset, keep only sample if needed)
-
-dataset/
-
-# Jupyter Notebook checkpoints
-
-.ipynb_checkpoints/
-
-# Logs
-
-*.log
-
-# OS files
-
+# ========================
+# System Files
+# ========================
 .DS_Store
 Thumbs.db
 
-# IDE / Editor files
-
+# ========================
+# IDE / Editor
+# ========================
 .vscode/
 .idea/
 
-# Temporary files
+# ========================
+# Environment Variables / Secrets
+# ========================
+.env
 
-*.tmp
-*.temp
+# ========================
+# Machine Learning Models
+# ========================
+*.h5
+*.keras
+*.pt
+*.pth
 
-# Testing / coverage
+# ========================
+# Dataset / Data Files
+# ========================
+dataset/
+data/
+*.zip
+*.csv
 
-.coverage
-htmlcov/
+# ========================
+# Generated / Runtime Files
+# ========================
+temp/
+encrypted_images/
+backend/static/heatmaps/
+*.log
 
-# Build files
+# ========================
+# Flask
+# ========================
+instance/
+.webassets-cache
 
-build/
-dist/
-*.egg-info/
+# ========================
+# Jupyter (if used)
+# ========================
+.ipynb_checkpoints/
+
+# ========================
+# OS / Misc
+# ========================
+*.swp
+*.swo

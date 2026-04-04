@@ -1,7 +1,10 @@
 tensorflow
-opencv-python
 numpy
-matplotlib
+opencv-python
 flask
+flask-login
 pycryptodome
+matplotlib
 scikit-learn
+pillow
+werkzeug
