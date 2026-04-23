@@ -34,7 +34,6 @@ Thumbs.db
 # ========================
 # Machine Learning Models
 # ========================
-*.h5
 *.keras
 *.pt
 *.pth
